@@ -2,15 +2,87 @@
 import { Box, Grid, HStack, Image, SimpleGrid } from "@chakra-ui/react";
 import { WhiteCircle } from "../../assets/images";
 import useAuthStore from "../../store/useAuth";
-import _ from "lodash";
 
 export const HomePage = () => {
   const [user] = useAuthStore((store) => [store.user]);
 
+  const data = [
+    {
+      id: 1,
+      name: "Apps",
+      sort: 1,
+      items: [
+        {
+          id: 1,
+          name: "Vaultwarden",
+          url: "https://bw.uripsub.dev/",
+          sort: 1,
+          icon: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/bitwarden.svg",
+        },
+        {
+          id: 2,
+          name: "Adguard",
+          url: "https://adguard.uripsub.dev/",
+          sort: 2,
+          icon: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/adguard-home.svg",
+        },
+        {
+          id: 3,
+          name: "Daily Expense",
+          url: "https://dew.uripsub.dev/",
+          sort: 3,
+          icon: "https://dew.uripsub.dev/icon.svg",
+        },
+        {
+          id: 4,
+          name: "Blog",
+          url: "https://blog.uripsub.dev/",
+          sort: 4,
+          icon: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/ghost-light.png",
+        },
+        {
+          id: 5,
+          name: "Darwin InOut",
+          url: "https://darwin1309.uripsub.dev/",
+          sort: 5,
+          icon: "https://cdn-images-1.medium.com/v2/resize:fit:1200/1*7QHmE3Q4EW_fSqpGOpcyrg.png",
+        },
+        {
+          id: 6,
+          name: "uBrain",
+          url: "https://ubrain.uripsub.dev/",
+          sort: 6,
+          icon: "https://www.svgrepo.com/download/353662/docusaurus.svg",
+        },
+        {
+          id: 7,
+          name: "Ghea",
+          url: "https://ghea.uripsub.dev/_/",
+          sort: 7,
+          icon: "https://seeklogo.com/images/P/pocketbase-logo-CA73994F09-seeklogo.com.png",
+        },
+        {
+          id: 8,
+          name: "Droppy",
+          url: "https://droppy.uripsub.dev/",
+          sort: 8,
+          icon: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/droppy.svg",
+        },
+        {
+          id: 9,
+          name: "Code",
+          url: "https://code.uripsub.dev/",
+          sort: 9,
+          icon: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/vscode.svg",
+        },
+      ],
+    },
+  ];
+
   return (
     <>
       <Box
-        backgroundColor={"#705a9d"}
+        backgroundColor={"#19181b"}
         borderBottomLeftRadius={"20px"}
         height={"95px"}
         padding={"12px"}
@@ -37,7 +109,7 @@ export const HomePage = () => {
           top={100}
         />
         <Box position={"absolute"} width={"calc(100% - 24px)"}>
-          <Grid marginBottom={"24px"}>
+          <Grid marginBottom={"16px"}>
             <HStack>
               <Box
                 backgroundColor={"#F5C2B3"}
@@ -65,38 +137,70 @@ export const HomePage = () => {
         </Box>
       </Box>
       <Box
-        backgroundColor={"#FFF"}
+        backgroundColor={"#25262B"}
         height={"calc(100vh - 95px)"}
         textAlign="center"
         overflowY={"scroll"}
         fontSize="xl"
-        color={"#1D1D1D"}
+        color={"#C1C2C5"}
         paddingBottom={12}
       >
-        {_.range(0, 2).map(() => (
-          <Box margin={"24px"} textAlign={"left"}>
-            <Box marginBottom={"16px"} fontSize={"20px"} fontWeight={500}>
-              Group
+        {data.map((group, i) => (
+          <Box
+            key={`group_${i}`}
+            margin={"24px"}
+            textAlign={"left"}
+            backgroundColor={"#202123"}
+            padding={8}
+            borderRadius={16}
+            border={"1px solid #373A40"}
+          >
+            <Box marginBottom={"16px"} fontSize={"1.375rem"} fontWeight={700}>
+              {group.name}
             </Box>
-            <SimpleGrid columns={[3, 4, 5, 6, 7]} spacing={5}>
-              {_.range(0, 10).map(() => (
-                <Box>
+            <SimpleGrid columns={[2, 3, 4, 5, 6, 7]} spacing={5}>
+              {group.items.map((item, j) => (
+                <Box
+                  key={`item_${j}`}
+                  onClick={() => window.open(item.url, "_blank")}
+                  display={"flex"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  flexDirection={"column"}
+                  margin={2}
+                >
                   <Box
+                    backgroundColor={"#25262B"}
+                    border={"1px solid #373A40"}
+                    w={"100%"}
+                    aspectRatio={"1/1"}
+                    borderRadius={[8, 12, 16, 20, 24, 28]}
                     display={"flex"}
-                    justifyContent={"center"}
                     alignItems={"center"}
+                    justifyContent={"center"}
+                    paddingTop={[2, 3, 4]}
+                    paddingBottom={[2, 3, 4]}
+                    paddingLeft={[4, 6, 8]}
+                    paddingRight={[4, 6, 8]}
+                    cursor={"pointer"}
                     flexDirection={"column"}
-                    margin={2}
                   >
-                    <Box fontSize={16} fontWeight={500}>
-                      Name
-                    </Box>
                     <Box
-                      backgroundColor={"green"}
-                      w={"100%"}
+                      fontSize={"1rem"}
+                      fontWeight={700}
+                      mb={2}
+                      textOverflow={"ellipsis"}
+                      whiteSpace={"nowrap"}
+                      overflow={"hidden"}
+                    >
+                      {item.name}
+                    </Box>
+                    <Image
+                      src={item.icon}
+                      width={"100%"}
                       aspectRatio={"1/1"}
-                      borderRadius={35}
-                    ></Box>
+                      _hover={{ transform: "scale(1.1) translateZ(0px)" }}
+                    />
                   </Box>
                 </Box>
               ))}

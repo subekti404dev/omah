@@ -26,7 +26,12 @@ function App() {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
       </Helmet>
-      <Box display={"flex"} justifyContent={"center"} color={"#1D1D1D"}>
+      <Box
+        display={"flex"}
+        justifyContent={"center"}
+        color={"#1D1D1D"}
+        backgroundColor={"#25262B"}
+      >
         <Box w={"100%"} h={"100vh"} position="relative">
           {loading && (
             <Box

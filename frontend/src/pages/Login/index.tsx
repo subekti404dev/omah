@@ -34,7 +34,7 @@ const LoginPage = () => {
 
   return (
     <Box
-      backgroundColor={"white"}
+      backgroundColor={"#25262B"}
       minH={"100vh"}
       textAlign="center"
       fontSize="xl"
@@ -47,7 +47,7 @@ const LoginPage = () => {
       <Stack
         spacing={4}
         p="1rem"
-        backgroundColor="whiteAlpha.900"
+        backgroundColor="#202123"
         boxShadow="md"
         borderRadius={8}
         minW={"250px"}
@@ -59,6 +59,9 @@ const LoginPage = () => {
               children={<CFaUserAlt color="gray.300" />}
             />
             <Input
+              color={"#C1C2C5"}
+              borderColor={"#373A40"}
+              backgroundColor={"#25262B"}
               type="email"
               placeholder="email address"
               isDisabled={isLoggingIn}
@@ -77,6 +80,9 @@ const LoginPage = () => {
               children={<CFaLock color="gray.300" />}
             />
             <Input
+              color={"#C1C2C5"}
+              borderColor={"#373A40"}
+              backgroundColor={"#25262B"}
               type={showPassword ? "text" : "password"}
               placeholder="Password"
               isDisabled={isLoggingIn}
