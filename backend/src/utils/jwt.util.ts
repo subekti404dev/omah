@@ -1,24 +1,14 @@
+import { IUser } from "db/db";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 dotenv.config();
 
-export interface IUser {
-  collectionId: string;
-  collectionName: string;
-  created: string;
-  deleted: boolean;
-  email: string;
-  hash_password: string;
-  id: string;
-  name: string;
-  updated: string;
-  workspace_id: string;
-}
+const jwtSecret = process.env.JWT_SECRET || "__th1s_is_secr3t";
 
 export const generateJwt = (payload: any) => {
-  return jwt.sign(payload, process.env.JWT_SECRET || "");
+  return jwt.sign(payload, jwtSecret);
 };
 
 export const decodeJwt = (token: any) => {
-  return jwt.verify(token, process.env.JWT_SECRET || "") as IUser;
+  return jwt.verify(token, jwtSecret) as IUser;
 };

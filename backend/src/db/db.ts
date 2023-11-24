@@ -9,13 +9,15 @@ import path from "path";
 const dataDir = path.join(process.cwd(), "data");
 const filePathCfg = path.join(dataDir, "config.json");
 
+export type IUser = {
+  name: string;
+  email: string;
+  password_hash: string;
+  avatar: string;
+};
+
 export type IData = {
-  user: {
-    name: string;
-    email: string;
-    password_hash: string;
-    avatar: string;
-  };
+  user: IUser;
   bookmarks: IBookmark[];
 };
 

@@ -18,8 +18,6 @@ const jwtAuth = (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = decodeJwt(token);
     res.locals.user = user;
-    res.locals.user_id = user.id;
-    res.locals.workspace_id = user.workspace_id;
     return next();
   } catch (error) {
     return handleUnauthorized();
