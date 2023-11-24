@@ -13,8 +13,8 @@ RUN cd /app/frontend && \
 FROM ubuntu:latest
 WORKDIR /app
 COPY --from=builder /app/frontend/dist /app/web
-COPY --from=builder /app/backend/single/dew /usr/local/bin/dew
-RUN chmod +x /usr/local/bin/dew
+COPY --from=builder /app/backend/single/bin /usr/local/bin/omah
+RUN chmod +x /usr/local/bin/omah
 
 EXPOSE ${PORT:-7000}
-CMD ["dew"]
+CMD ["omah"]
