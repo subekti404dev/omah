@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import { generateJwt } from "../../utils/jwt.util";
 import { validateRequiredFields } from "../../utils/field-validation.util";
 import { database } from "../../db/db";
+import md5 from "md5";
 const router = express.Router();
 
 router.post("/login", async (req: Request, res: Response) => {
@@ -9,9 +10,10 @@ router.post("/login", async (req: Request, res: Response) => {
     const { email, password } = req.body || {};
     validateRequiredFields({ email, password });
 
-    const { password: userPass, ...user } = database.getUser();
+    const { password_hash, ...user } = database.getUser();
 
-    if (userPass !== password) throw Error("Invalid Email or Password");
+    if (password_hash !== md5(password))
+      throw Error("Invalid Email or Password");
 
     res.json({
       success: true,

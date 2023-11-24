@@ -13,7 +13,7 @@ export type IData = {
   user: {
     name: string;
     email: string;
-    password: string;
+    password_hash: string;
     avatar: string;
   };
   bookmarks: IBookmark[];
@@ -37,7 +37,7 @@ const initValue = {
   user: {
     name: "Admin",
     email: "admin@admin.com",
-    password: "admin",
+    password_hash: "admin",
     avatar: "male_24.png",
   },
   bookmarks: [],

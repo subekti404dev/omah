@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/me", async (req: Request, res: Response) => {
   try {
-    const { password, ...data } = database.getUser();
+    const { password_hash, ...data } = database.getUser();
     res.json({
       success: true,
       data,
