@@ -123,7 +123,7 @@ export const HomePage = () => {
                     flexDirection={"column"}
                   >
                     <Box
-                      fontSize={"1rem"}
+                      fontSize={["0.8rem", "0.9rem", "1rem"]}
                       fontWeight={700}
                       mb={2}
                       textOverflow={"ellipsis"}
