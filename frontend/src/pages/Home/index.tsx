@@ -95,7 +95,10 @@ export const HomePage = () => {
             <Box marginBottom={"16px"} fontSize={"1.375rem"} fontWeight={700}>
               {group.name}
             </Box>
-            <SimpleGrid columns={[2, 3, 4, 5, 6, 7]} spacing={5}>
+            <SimpleGrid
+              columns={[2, 3, 4, 5, 6, 7]}
+              spacing={[0.5, 1, 2, 3, 5, 6]}
+            >
               {group.items.map((item, j) => (
                 <Box
                   key={`item_${j}`}

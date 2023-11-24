@@ -70,6 +70,25 @@ class Database {
   public getBookmarks() {
     return this._data.bookmarks;
   }
+
+  public addCategory(data: any) {
+    this._data.bookmarks = [...this._data.bookmarks, data];
+    this.writeToFile(filePathCfg, this._data);
+  }
+
+  public addItem(data: any) {
+    const { category_id, ...item_data } = data;
+    const categoryIndex = this._data.bookmarks.findIndex(
+      (c) => c.id === category_id
+    );
+    if (categoryIndex >= 0) {
+      this._data.bookmarks[categoryIndex].items = [
+        ...this._data.bookmarks[categoryIndex].items,
+        item_data,
+      ];
+      this.writeToFile(filePathCfg, this._data);
+    }
+  }
 }
 
 export const database = new Database();
