@@ -25,6 +25,7 @@
     "react-icons": "^3.11.0",
     "react-spring-bottom-sheet": "3.5.0-alpha.0",
     "vite-plugin-pwa": "^0.16.7",
+    "wait": "^0.4.2",
     "web-vitals": "^2.1.4",
     "zustand": "^4.4.6"
   },

@@ -1,9 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Box, Grid, HStack, Image, SimpleGrid } from "@chakra-ui/react";
+import {
+  Box,
+  Grid,
+  HStack,
+  Image,
+  SimpleGrid,
+  chakra,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { WhiteCircle } from "../../assets/images";
 import useAuthStore from "../../store/useAuth";
 import useBookmarkStore from "../../store/useBookmark";
 import { useEffect } from "react";
+import { FaPlus } from "react-icons/fa";
+import FloatingButton from "../../components/FloatingButton";
+import { ModalCreate } from "../../components/ModalCreateNew";
+const PlusIcon = chakra(FaPlus);
 
 export const HomePage = () => {
   const [user] = useAuthStore((store) => [store.user]);
@@ -11,6 +23,7 @@ export const HomePage = () => {
     store.bookmarks,
     store.getBookmarks,
   ]);
+  const { isOpen, onClose, onOpen } = useDisclosure();
 
   useEffect(() => {
     getBookmarks();
@@ -147,6 +160,10 @@ export const HomePage = () => {
             </SimpleGrid>
           </Box>
         ))}
+        <FloatingButton onClick={onOpen}>
+          <PlusIcon />
+        </FloatingButton>
+        <ModalCreate isOpen={isOpen} onClose={onClose} />
       </Box>
     </>
   );
