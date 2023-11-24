@@ -85,10 +85,10 @@ export const HomePage = () => {
         {bookmarks.map((group, i) => (
           <Box
             key={`group_${i}`}
-            margin={"24px"}
+            margin={[2, 4, 6, 8]}
             textAlign={"left"}
             backgroundColor={"#202123"}
-            padding={8}
+            padding={[2, 4, 6, 8]}
             borderRadius={16}
             border={"1px solid #373A40"}
           >
