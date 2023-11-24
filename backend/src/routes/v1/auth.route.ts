@@ -1,8 +1,7 @@
 import express, { Request, Response } from "express";
-import md5 from "md5";
-import pb from "../../utils/pocketbase.util";
 import { generateJwt } from "../../utils/jwt.util";
 import { validateRequiredFields } from "../../utils/field-validation.util";
+import { database } from "../../db/db";
 const router = express.Router();
 
 router.post("/login", async (req: Request, res: Response) => {
@@ -10,15 +9,10 @@ router.post("/login", async (req: Request, res: Response) => {
     const { email, password } = req.body || {};
     validateRequiredFields({ email, password });
 
-    const passHash = md5(password);
+    const { password: userPass, ...user } = database.getUser();
 
-    const { items: users } = await pb.collection("exp_users").getList(1, 1, {
-      filter: `email = '${email}' && hash_password = '${passHash}'`,
-    });
+    if (userPass !== password) throw Error("Invalid Email or Password");
 
-    if (users.length === 0) throw Error("Invalid Email or Password");
-
-    const user = users[0];
     res.json({
       success: true,
       token: generateJwt(user),

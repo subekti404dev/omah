@@ -6,6 +6,9 @@ import dotenv from "dotenv";
 import path from "path";
 dotenv.config();
 require("cross-fetch/polyfill");
+import { database } from "./db/db";
+
+database.init();
 
 const app: Express = express();
 const port = process.env.PORT || 7000;
