@@ -11,7 +11,8 @@ RUN cd /app/frontend && \
     bun i && bun run build 
 
 FROM ubuntu:latest
-RUN apt-get update && apt install docker.io -y
+RUN apt-get update && apt-get install docker.io -y && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY --from=builder /app/frontend/dist /app/web
 COPY --from=builder /app/backend/single/bin /usr/local/bin/omah
