@@ -11,6 +11,7 @@ RUN cd /app/frontend && \
     bun i && bun run build 
 
 FROM ubuntu:latest
+RUN apt-get update && apt install docker.io -y
 WORKDIR /app
 COPY --from=builder /app/frontend/dist /app/web
 COPY --from=builder /app/backend/single/bin /usr/local/bin/omah
