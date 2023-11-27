@@ -4,13 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "bun run build:clean && bun run build:js && bun run build:cjs",
+    "build": "pnpm run build:clean && pnpm run build:js && pnpm run build:cjs",
     "build:clean": "rimraf dist/",
     "build:js": "npx tsc",
     "build:cjs": "npx esbuild dist/index.js  --bundle --outfile=dist/app.cjs --format=cjs --platform=node && ncc build dist/app.cjs -o single",
     "build:bin": "cd single && bun build ./index.cjs --compile --outfile ./bin && cd ..",
     "start": "node dist/index.js",
-    "dev": "bun run build && concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
+    "dev": "pnpm run build && concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
   },
   "keywords": [],
   "author": "",
