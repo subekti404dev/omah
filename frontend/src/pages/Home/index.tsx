@@ -15,10 +15,12 @@ import { useEffect } from "react";
 import { FaPlus } from "react-icons/fa";
 import FloatingButton from "../../components/FloatingButton";
 import { ModalCreate } from "../../components/ModalCreateNew";
+import useMemoryStore from "../../store/useMemory";
 const PlusIcon = chakra(FaPlus);
 
 export const HomePage = () => {
   const [user] = useAuthStore((store) => [store.user]);
+  const [memory] = useMemoryStore((store) => [store.memory]);
   const [bookmarks, getBookmarks] = useBookmarkStore((store) => [
     store.bookmarks,
     store.getBookmarks,
@@ -86,6 +88,7 @@ export const HomePage = () => {
           </Grid>
         </Box>
       </Box>
+
       <Box
         backgroundColor={"#25262B"}
         height={"calc(100vh - 95px)"}
@@ -95,6 +98,30 @@ export const HomePage = () => {
         color={"#C1C2C5"}
         paddingBottom={12}
       >
+        <Box
+          margin={[2, 4, 6, 8]}
+          textAlign={"left"}
+          backgroundColor={"#202123"}
+          padding={[2, 4, 6, 8]}
+          borderRadius={16}
+          border={"1px solid #373A40"}
+          display={"flex"}
+          flexDirection={"row"}
+        >
+          <Box flex={1}>
+            <Box fontSize={14}>Total Memory Usage</Box>
+            {!!memory && ((memory.memory.used || 0) / (1024 * 1024)).toFixed(2)}
+            {" GB"}
+          </Box>
+          <Box flex={1}>
+            <Box fontSize={14}>Percentage Memory Usage</Box>
+            {!!memory &&
+              ((memory.memory.used || 0) / (memory.memory.total || 1)).toFixed(
+                2
+              )}
+            {" %"}
+          </Box>
+        </Box>
         {bookmarks.map((group, i) => (
           <Box
             key={`group_${i}`}

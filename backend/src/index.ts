@@ -1,12 +1,13 @@
+import dotenv from "dotenv";
+dotenv.config();
+require("cross-fetch/polyfill");
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import v1Routes from "./routes/v1";
-import dotenv from "dotenv";
 import path from "path";
-dotenv.config();
-require("cross-fetch/polyfill");
 import { database } from "./db/db";
+import { socket } from "./utils/socket";
 
 database.init();
 
@@ -27,6 +28,7 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(process.cwd(), "web", "index.html"));
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
 });
+socket.init(server);

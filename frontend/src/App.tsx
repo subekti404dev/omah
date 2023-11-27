@@ -6,6 +6,8 @@ import "@fontsource/poppins";
 import { Helmet } from "react-helmet";
 import useAuthStore from "./store/useAuth";
 import LoginPage from "./pages/Login";
+import { socket } from "./utils/socket";
+import useMemoryStore from "./store/useMemory";
 
 function App() {
   const [init, user, loading] = useAuthStore((store) => [
@@ -13,9 +15,13 @@ function App() {
     store.user,
     store.loading,
   ]);
-
+  const [initMemory] = useMemoryStore((store) => [store.init]);
   useEffect(() => {
+    socket.init(`${import.meta.env.VITE_API_HOST || ""}`);
     init();
+    setTimeout(() => {
+      initMemory();
+    }, 2000);
   }, []);
 
   return (
