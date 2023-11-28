@@ -15,6 +15,7 @@ export interface Memory {
   shared: number;
   buff_cache: number;
   available: number;
+  percentage: number;
 }
 
 export interface Swap {
@@ -35,12 +36,11 @@ const useMemoryStore = create<IBookmarkStore>((set, get) => ({
   init: () => {
     if (!get().initialized) {
       set({ initialized: true });
-      socket.emit("memory_info");
       socket.on("memory_info", (v) => {
-        set({ memory: JSON.parse(v) });
-        setTimeout(() => {
-          socket.emit("memory_info", new Date().toISOString());
-        }, 1000 * 5);
+        const memory = JSON.parse(v);
+        memory.memory.percentage =
+          (memory.memory.used / memory.memory.total) * 100;
+        set({ memory });
       });
     }
   },

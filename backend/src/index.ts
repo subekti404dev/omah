@@ -8,6 +8,7 @@ import v1Routes from "./routes/v1";
 import path from "path";
 import { database } from "./db/db";
 import { socket } from "./utils/socket";
+import { initMemInfoScheduler } from "./utils/scheduler";
 
 database.init();
 
@@ -32,3 +33,4 @@ const server = app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
 });
 socket.init(server);
+initMemInfoScheduler();

@@ -108,18 +108,46 @@ export const HomePage = () => {
           display={"flex"}
           flexDirection={"row"}
         >
-          <Box flex={1}>
-            <Box fontSize={14}>Total Memory Usage</Box>
-            {!!memory && ((memory.memory.used || 0) / (1024 * 1024)).toFixed(2)}
-            {" GB"}
+          <Box
+            flex={1}
+            display={"flex"}
+            flexDirection={"column"}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
+            <Box fontSize={12}>Total Memory</Box>
+            <Box fontWeight={600} fontSize={"24px"}>
+              {!!memory &&
+                ((memory.memory.total || 0) / (1024 * 1024)).toFixed(2)}
+              {" GB"}
+            </Box>
           </Box>
-          <Box flex={1}>
-            <Box fontSize={14}>Percentage Memory Usage</Box>
-            {!!memory &&
-              ((memory.memory.used || 0) / (memory.memory.total || 1)).toFixed(
-                2
-              )}
-            {" %"}
+          <Box
+            flex={1}
+            display={"flex"}
+            flexDirection={"column"}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
+            <Box fontSize={12}>Memory Usage</Box>
+            <Box fontWeight={600} fontSize={"24px"}>
+              {!!memory &&
+                ((memory.memory.used || 0) / (1024 * 1024)).toFixed(2)}
+              {" GB"}
+            </Box>
+          </Box>
+          <Box
+            flex={1}
+            display={"flex"}
+            flexDirection={"column"}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
+            <Box fontSize={12}>Memory Usage (%)</Box>
+            <Box fontWeight={600} fontSize={"24px"}>
+              {!!memory && memory.memory.percentage.toFixed(2)}
+              {" %"}
+            </Box>
           </Box>
         </Box>
         {bookmarks.map((group, i) => (

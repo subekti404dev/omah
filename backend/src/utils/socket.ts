@@ -20,9 +20,9 @@ class Socket {
         this._io?.emit("chat message", msg);
       });
 
-      socket.on("memory_info", () => {
-        this._io?.emit("memory_info", JSON.stringify(getMemoryInfo()));
-      });
+      // socket.on("memory_info", () => {
+      //   this._io?.emit("memory_info", JSON.stringify(getMemoryInfo()));
+      // });
 
       socket.on("disconnect", () => {
         console.log("User disconnected");
