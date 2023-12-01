@@ -10,5 +10,5 @@ export const initMemInfoScheduler = () => {
   timeout.memory = setTimeout(() => {
     socket.emit("memory_info", JSON.stringify(getMemoryInfo()));
     initMemInfoScheduler();
-  }, 1000 * 3);
+  }, 1000 * 1);
 };
