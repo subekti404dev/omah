@@ -10,6 +10,8 @@ interface IBookmarkStore {
   getBookmarks: () => Promise<any>;
   addCategory: (data: any, onAfter?: () => void) => Promise<any>;
   addItem: (data: any, onAfter?: () => void) => Promise<any>;
+  deleteItem: (itemId: number, categoryId: number) => Promise<any>;
+  deleteCategory: (categoryId: number) => Promise<any>;
 }
 export interface IBookmark {
   id: number;
@@ -71,6 +73,38 @@ const useBookmarkStore = create<IBookmarkStore>((set, get) => ({
       if (data.data) {
         set({ loading: false });
         onAfter?.();
+        await wait(500);
+        return get().getBookmarks();
+      }
+    } catch (error) {
+      set({ loading: false });
+    }
+  },
+  deleteItem: async (itemId, categoryId) => {
+    try {
+      if (get().loading) return;
+      set({ loading: true });
+      const { data } = await axiosInstance().delete(
+        `/bookmarks/categories/${categoryId}/items/${itemId}`
+      );
+      if (data.success) {
+        set({ loading: false });
+        await wait(500);
+        return get().getBookmarks();
+      }
+    } catch (error) {
+      set({ loading: false });
+    }
+  },
+  deleteCategory: async (categoryId) => {
+    try {
+      if (get().loading) return;
+      set({ loading: true });
+      const { data } = await axiosInstance().delete(
+        `/bookmarks/categories/${categoryId}`
+      );
+      if (data.success) {
+        set({ loading: false });
         await wait(500);
         return get().getBookmarks();
       }
