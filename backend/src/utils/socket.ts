@@ -12,7 +12,7 @@ class Socket {
 
   private _subEvents() {
     this._io?.on("connection", (socket: any) => {
-      console.log("A user connected");
+      // console.log("A user connected");
 
       // Listen for messages
       socket.on("chat message", (msg: string) => {
@@ -20,12 +20,8 @@ class Socket {
         this._io?.emit("chat message", msg);
       });
 
-      // socket.on("memory_info", () => {
-      //   this._io?.emit("memory_info", JSON.stringify(getMemoryInfo()));
-      // });
-
       socket.on("disconnect", () => {
-        console.log("User disconnected");
+        // console.log("User disconnected");
       });
     });
   }
