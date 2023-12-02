@@ -78,6 +78,19 @@ class Database {
     this.writeToFile(filePathCfg, this._data);
   }
 
+  public deleteCategory(category_id: number) {
+    const categoryIndex = this._data.bookmarks.findIndex(
+      (c) => c.id === category_id
+    );
+    if (categoryIndex >= 0) {
+      this._data.bookmarks = (this._data.bookmarks || [])
+        .filter((category) => category.id !== category_id)
+        .map((item, index) => ({ ...item, id: index + 1, sort: index + 1 }));
+
+      this.writeToFile(filePathCfg, this._data);
+    }
+  }
+
   public addItem(data: any) {
     const { category_id, ...item_data } = data;
     const categoryIndex = this._data.bookmarks.findIndex(
@@ -88,6 +101,21 @@ class Database {
         ...this._data.bookmarks[categoryIndex].items,
         item_data,
       ];
+      this.writeToFile(filePathCfg, this._data);
+    }
+  }
+
+  public deleteItem(item_id: number, category_id: number) {
+    const categoryIndex = this._data.bookmarks.findIndex(
+      (c) => c.id === category_id
+    );
+    if (categoryIndex >= 0) {
+      this._data.bookmarks[categoryIndex].items = (
+        this._data.bookmarks[categoryIndex].items || []
+      )
+        .filter((item) => item.id !== item_id)
+        .map((item, index) => ({ ...item, id: index + 1, sort: index + 1 }));
+
       this.writeToFile(filePathCfg, this._data);
     }
   }
