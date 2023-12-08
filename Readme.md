@@ -11,7 +11,6 @@ services:
     container_name: omah
     image: subekti13/omah:latest
     restart: unless-stopped
-      - JWT_SECRET=pppp
     volumes:
       - ./data:/app/data
     ports:
