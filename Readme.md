@@ -1,6 +1,6 @@
 # Omah
 
-In Javanese, 'Omah' translates to 'home' or 'house.' In the context of this application, it serves as your personalized homepage, allowing you to conveniently store and organize various website links.
+In Javanese, `Omah` translates to `home`. In the context of this application, it serves as your personalized homepage, allowing you to conveniently store and organize various website links.
 
 ## Run with docker
 
